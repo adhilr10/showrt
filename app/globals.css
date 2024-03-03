@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+
+@layer base {
+    :root {
+      --gradient: linear-gradient(to top left,#0052D4,#4364F7,#6FB1FC);
+  
+      --background: 230 65% 3.36%;
+      --foreground: 230 10% 97.1%;
+  
+      --muted: 230 50% 18.06%;
+      --muted-foreground: 230 10% 54.2%;
+  
+      --popover: 230 45% 5.46%;
+      --popover-foreground: 230 10% 97.1%;
+  
+      --card: 230 45% 5.46%;
+      --card-foreground: 230 10% 97.1%;
+  
+      --border: 230 50% 18.06%;
+      --input: 230 50% 18.06%;
+  
+      --primary: 230 100% 42%;
+      --primary-foreground: 230 10% 97.1%;
+  
+      --secondary: 230 50% 18.06%;
+      --secondary-foreground: 230 10% 97.1%;
+  
+      --accent: 230 50% 18.06%;
+      --accent-foreground: 230 10% 97.1%;
+  
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 230 10% 97.1%;
+  
+      --ring: 230 100% 42%;
+    }
+  }
+  @layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
