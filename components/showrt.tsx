@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/firebase";
+import MaxWidthWrapper from "./max-width-wrapper";
 
 const Showrt = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ const Showrt = () => {
 
   return (
     <>
+     <MaxWidthWrapper>
       <div className="flex justify-between p-2">
         <h2 className="text-2xl font-bold text-white">Showrt</h2>
         <div className="space-x-2">
@@ -50,6 +52,7 @@ const Showrt = () => {
           </div>
         </form>
       </div>
+      </MaxWidthWrapper>
     </>
   );
 };

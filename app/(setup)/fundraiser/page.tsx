@@ -1,13 +1,12 @@
 "use client"
 import FundraiserForm from "@/components/fundraiser-form";
-import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 const Fundraiser = () => {
   return (
     <>
-      <MaxWidthWrapper>
+     
         <div>
           <div className="flex justify-between p-2">
             <Link href="/">
@@ -19,7 +18,6 @@ const Fundraiser = () => {
             <FundraiserForm />
           </div>
         </div>
-      </MaxWidthWrapper>
     </>
   );
 };
