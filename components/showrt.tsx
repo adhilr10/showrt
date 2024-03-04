@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/firebase";
-import MaxWidthWrapper from "./max-width-wrapper";
+import Link from "next/link";
 
 const Showrt = () => {
   const [email, setEmail] = useState("");
@@ -23,11 +23,14 @@ const Showrt = () => {
 
   return (
     <>
-     <MaxWidthWrapper>
       <div className="flex justify-between p-2">
-        <h2 className="text-2xl font-bold text-white">Showrt</h2>
+        <Link href="/">
+          <h2 className="text-2xl font-bold text-white">Showrt</h2>
+        </Link>
         <div className="space-x-2">
-          <Button variant="primary">Early Access</Button>
+          <Link href="/fundraiser">
+            <Button variant="primary">Fundraiser</Button>
+          </Link>
         </div>
       </div>
       <div className="text-center mt-28">
@@ -44,7 +47,6 @@ const Showrt = () => {
               type="email"
               placeholder="Enter your email address"
               onChange={(e) => setEmail(e.target.value)}
-              
             />
             <Button variant="primary" type="submit">
               Join waitlist
@@ -52,7 +54,6 @@ const Showrt = () => {
           </div>
         </form>
       </div>
-      </MaxWidthWrapper>
     </>
   );
 };

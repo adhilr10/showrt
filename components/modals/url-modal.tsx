@@ -38,7 +38,7 @@ export const UrlModal = ({ generatedUrl }: Props) => {
 
   return (
     <Dialog open onOpenChange={onClose}>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden max-w-[400px]">
+      <DialogContent className="bg-white text-black p-0 overflow-hidden max-w-[380px] md:max-w-[410px]">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
             Link Generated
@@ -50,7 +50,7 @@ export const UrlModal = ({ generatedUrl }: Props) => {
           </Label>
           <div className="flex items-center mt-2 gap-x-2">
             <Input
-              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 w-72"
+              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 w-64 md:w-72"
               defaultValue={generatedUrl}
               readOnly
             />

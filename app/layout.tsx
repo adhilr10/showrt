@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import MaxWidthWrapper from "@/components/max-width-wrapper";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body className={font.className}>   
-      <div className="h-full [background:radial-gradient(160%_125%_at_50%_10%,#000_40%,#13e_100%)]"> {children}</div>
+      <div className="h-full [background:radial-gradient(160%_125%_at_50%_10%,#000_40%,#13e_100%)]"><MaxWidthWrapper>{children}</MaxWidthWrapper> </div>
      </body>
     </html>
     </ClerkProvider>

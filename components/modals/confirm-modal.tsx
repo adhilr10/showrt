@@ -52,7 +52,7 @@ const ConfirmModal = ({
 
     try {
       if (!user) return;
-      const newCollectionRef = collection(db, "users", user.id, "urls");
+      const newCollectionRef = collection(db, "urls");
       await addDoc(newCollectionRef, {
         id: uuid,
         upiUrl: upiUrl,
@@ -68,13 +68,13 @@ const ConfirmModal = ({
     <>
       {mounted ? (
         <Dialog open onOpenChange={onClose}>
-          <DialogContent className="max-w-[400px]">
+          <DialogContent className="max-w-[380px] md:max-w-[410]">
             <DialogHeader>
               <DialogTitle className="text-center text-red-500">
                 Confirm the form
               </DialogTitle>
               <DialogDescription className="text-center">
-                Please check that you have filled out the form correctly
+                Please ensure that all UPI details are entered correctly
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">

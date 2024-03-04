@@ -18,8 +18,7 @@ const MainPage = ({ params }: { params: { uuid: string } }) => {
   const [upiData, setUpiData] = useState<UpiData | null>(null);
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isUpiDataAvailable, setIsUpiDataAvailable] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -32,10 +31,8 @@ const MainPage = ({ params }: { params: { uuid: string } }) => {
   useEffect(() => {
     const fetchUpiData = async () => {
       try {
-        if (!user) return;
-
         const q = query(
-          collection(db, "users", user.id, "urls"),
+          collection(db, "urls"),
           orderBy("timestamp", "desc") // Sort by recent to oldest
         );
 
@@ -43,9 +40,7 @@ const MainPage = ({ params }: { params: { uuid: string } }) => {
 
         if (!querySnapshot.empty) {
           const data = querySnapshot.docs[0].data() as UpiData;
-          if (isMounted) {
-            setUpiData(data);
-          }
+          setUpiData(data);
         } else {
           console.log("No UPI data found.");
         }
@@ -55,31 +50,29 @@ const MainPage = ({ params }: { params: { uuid: string } }) => {
     };
 
     fetchUpiData();
-  }, [params.uuid, user, isMounted]);
+  }, [params.uuid]);
 
   useEffect(() => {
     if (upiData && upiData.upiUrl && params.uuid === upiData.id) {
-        setIsOpen(true);
+      setIsUpiDataAvailable(true);
 
-      const strUrl = upiData.upiUrl || upiData.upiUrl1;
+      const strUrl = upiData.upiUrl;
+      const strUrl1 = upiData.upiUrl1;
       const redirectTimer = setTimeout(() => {
         router.push(strUrl);
       }, 1000);
-  
-      return () => clearTimeout(redirectTimer);
-    } else return;
-  }, [upiData, router]);
-  
-  return (
-    <>
-    {isOpen ? (
-        <Showrt />
-    ): (
-      <Custom404 />
-    )}
-      
-    </>
-  );
+      const redirectTimer1 = setTimeout(() => {
+        router.push(strUrl1);
+      }, 8000);
+
+      return () => {
+        clearTimeout(redirectTimer);
+        clearTimeout(redirectTimer1);
+      };
+    }
+  }, [upiData, params.uuid]);
+
+  return <>{isUpiDataAvailable ? <Showrt /> : <Custom404 />}</>;
 };
 
 export default MainPage;
