@@ -49,8 +49,8 @@ const FundraiserForm = () => {
 
     number: z
       .string()
-      .min(13, { message: "UPI number must be at least 13 characters long." })
-      .max(13, { message: "UPI number must not contain spaces." }),
+      .min(13, { message: "UPI number must consist of at least 10 digits." })
+      .max(13, { message: "UPI number must have 10+ digits, no spaces." }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -91,9 +91,9 @@ const FundraiserForm = () => {
 
     try {
       await addDoc(collection(db, "users", user.id, "files"), {
-        id: data.id,
+        id: user.id,
         upiName: data.name,
-        upiId: data.id,
+        upiId: data.id.toLowerCase(),
         upiNumber: data.number,
         timestamp: serverTimestamp(),
       });
