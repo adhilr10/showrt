@@ -1,8 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
 import { MoreHorizontalIcon } from "lucide-react";
-import Link from "next/link";
 
 export default function Custom404() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +23,7 @@ export default function Custom404() {
     return (
       <div className="flex flex-col justify-center items-center h-screen text-white">
         <h1 className="text-3xl md:text-4xl font-bold mb-3">404 - Page Not Found</h1>
-        <p>This link is not available! <Link href="/" className="underline text-blue-500">Back to home</Link></p>
+        <p>This link is not available! <a href="/" className="underline text-blue-500">Back to home</a></p>
 
       </div>
     );
