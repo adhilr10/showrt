@@ -1,10 +1,10 @@
-"use client";
+"use client"
+
 import Custom404 from "@/app/not-found";
 import Showrt from "@/components/showrt";
 import { db } from "@/firebase";
-import { useUser } from "@clerk/nextjs";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface UpiData {
@@ -14,63 +14,52 @@ interface UpiData {
 }
 
 const MainPage = ({ params }: { params: { uuid: string } }) => {
-  const { user } = useUser();
-  const [upiData, setUpiData] = useState<UpiData | null>(null);
+  const [upiData, setUpiData] = useState<UpiData[]>([]);
   const router = useRouter();
-  const [isMounted, setIsMounted] = useState(false);
-  const [isUpiDataAvailable, setIsUpiDataAvailable] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-
-    return () => {
-      setIsMounted(false);
-    };
-  }, []);
 
   useEffect(() => {
     const fetchUpiData = async () => {
       try {
         const q = query(
           collection(db, "urls"),
-          orderBy("timestamp", "desc") // Sort by recent to oldest
+          orderBy("timestamp", "desc")
         );
 
         const querySnapshot = await getDocs(q);
 
-        if (!querySnapshot.empty) {
-          const data = querySnapshot.docs[0].data() as UpiData;
-          setUpiData(data);
-        } else {
-          console.log("No UPI data found.");
-        }
+        const data = querySnapshot.docs.map((doc) => doc.data() as UpiData);
+        setUpiData(data);
       } catch (error) {
         console.error("Error fetching UPI data: ", error);
       }
     };
 
     fetchUpiData();
-  }, [params.uuid]);
+  }, []);
 
   useEffect(() => {
-    if (upiData && upiData.upiUrl && params.uuid === upiData.id) {
-      setIsUpiDataAvailable(true);
+    upiData.forEach((data) => {
+      if (data && data.upiUrl && params.uuid === data.id) {
+        const strUrl = data.upiUrl;
+        const strUrl1 = data.upiUrl1;
 
-      const strUrl = upiData.upiUrl;
-      const strUrl1 = upiData.upiUrl1;
-      const redirectTimer = setTimeout(() => {
-        router.push(strUrl);
-      }, 1000);
-      const redirectTimer1 = setTimeout(() => {
-        router.push(strUrl1);
-      }, 8000);
+        const redirectTimer = setTimeout(() => {
+          router.push(strUrl);
+        }, 1000);
+        
+        const redirectTimer1 = setTimeout(() => {
+          router.push(strUrl1);
+        }, 5000);
 
-      return () => {
-        clearTimeout(redirectTimer);
-        clearTimeout(redirectTimer1);
-      };
-    }
-  }, [upiData, params.uuid]);
+        return () => {
+          clearTimeout(redirectTimer);
+          clearTimeout(redirectTimer1);
+        };
+      }
+    });
+  }, [upiData, params.uuid, router]);
+
+  const isUpiDataAvailable = upiData.some((data) => data.id === params.uuid);
 
   return <>{isUpiDataAvailable ? <Showrt /> : <Custom404 />}</>;
 };

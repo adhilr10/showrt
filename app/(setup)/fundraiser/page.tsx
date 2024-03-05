@@ -12,7 +12,8 @@ const Fundraiser = () => {
             <Link href="/">
               <h2 className="text-2xl font-bold text-white">Showrt</h2>
             </Link>
-            <UserButton signInUrl="/" />
+            <UserButton afterSignOutUrl="/" />
+          
           </div>
           <div className="flex flex-col justify-center items-center mt-24">
             <FundraiserForm />
