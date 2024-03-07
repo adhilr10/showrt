@@ -5,8 +5,14 @@ import FinalModal from "@/components/modals/final-modal";
 import Showrt from "@/components/showrt";
 import { db } from "@/firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { Metadata } from "next";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+
+const metadata: Metadata = {
+  title: "Showrt",
+  description: "UPI redirect links here",
+};
 
 interface UpiData {
   upiUrl: string;
@@ -66,7 +72,7 @@ const MainPage = ({ params }: { params: { uuid: string } }) => {
   }, [upiData, params.uuid, router]);
 
   const handleCloseModal = () => {
-    setShowFinalModal(false)
+    setShowFinalModal(false);
   };
 
   const isUpiDataAvailable = upiData.some((data) => data.id === params.uuid);

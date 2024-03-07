@@ -8,7 +8,7 @@ const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Showrt",
-  description: "Generate showrt",
+  description: "Generate redirect link",
 };
 
 export default function RootLayout({

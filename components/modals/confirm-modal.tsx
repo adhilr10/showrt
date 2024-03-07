@@ -74,7 +74,8 @@ const ConfirmModal = ({
                 Confirm the form
               </DialogTitle>
               <DialogDescription className="text-center">
-                Please ensure that all UPI details are entered correctly
+                Please Verify: Entered UPI name (upper/lowercase) and other details 
+                must match UPI app info.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">

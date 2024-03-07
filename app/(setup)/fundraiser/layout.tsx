@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "Fundraiser",
-  description: "fun",
+  description: "Generate UPI redirect links",
 };
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {

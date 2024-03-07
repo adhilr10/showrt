@@ -74,7 +74,7 @@ const FinalModal = ({ strUrl, strUrl1, handleCloseModal }: Props) => {
         console.error("Failed to copy text: ", error);
       });
   };
-  
+
   return (
     <Dialog open onOpenChange={handleCloseModal}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden max-w-[380px] md:max-w-[410px]">
